@@ -19,12 +19,13 @@ inc_dirs += ['c_alg/src']
 sources += glob.glob("cy_alg/*.pyx")
 sources += glob.glob("c_alg/src/*.c")
 
+# list containing the data structure implemented
 impl_data_structure = ["queue", "trie"]
 
 
 def extensions_generator():
     """
-    :return return a list containing all the extension of the implemented data structures
+    @return return a list containing all the extension of the implemented data structures
     """
     extensions = []
 
@@ -48,11 +49,11 @@ setup(
     author="Paolo D\'Elia",
     author_email="paolo.delia99@gmail.com",
     version=VERSION,
+    license="MIT",
     description='Let c-algorithms project be imported in cython',
     long_description="""\
     """,
     # url='',
-    license='http://www.opensource.org/licenses/bsd-license.php',
     cmdclass={'build_ext': build_ext},
     ext_modules=cythonize(extensions_generator()),
     packages=['cy_alg'],

@@ -3,6 +3,7 @@ import queue
 
 Queue = queue.Queue
 
+
 def test_queue_01():
     q = Queue()
     nose.tools.assert_is_instance(q, queue.Queue)
@@ -22,6 +23,7 @@ def test_queue_pop():
     second = q.pop()
     nose.tools.assert_equal(first, 10)
     nose.tools.assert_equal(second, 20)
+
 
 def test_queue_extends():
     q = Queue()
