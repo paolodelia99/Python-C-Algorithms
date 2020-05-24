@@ -32,6 +32,11 @@ cdef class Trie:
             raise MemoryError()
 
     def remove(self,str key):
+        """
+        Remove the element of the trie that has the key
+
+        @param key the key to remove
+        """
         cdef char* c_key = self.get_c_string(key)
 
         if not ctrie.trie_remove(self._c_trie, c_key):

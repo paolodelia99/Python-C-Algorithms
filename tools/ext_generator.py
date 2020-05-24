@@ -17,8 +17,7 @@ sources += glob.glob("c_alg/src/*.c")
 
 impl_data_structure = [DataStructureExtention("queue", "queue"), DataStructureExtention("trie", "trie"),
                        DataStructureExtention("hash_table", "hash-table",
-                                              ["c_alg/src/compare-string.c", "c_alg/src/hash"
-                                                                             "-string.c"])]
+                                              ["c_alg/src/compare-string.c", "c_alg/src/hash-string.c"])]
 
 
 def extensions_generator():
