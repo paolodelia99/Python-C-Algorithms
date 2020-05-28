@@ -3,13 +3,16 @@ import nose
 
 HashTable = hash_table.HashTable
 
+
 def test_hash_table_101():
     h = HashTable()
     nose.tools.assert_is_instance(h, hash_table.HashTable)
 
+
 def test_hash_table_num_entries():
     h = HashTable()
     nose.tools.assert_equal(h.num_entries(), 0)
+
 
 def test_hash_table_add():
     h = HashTable()
