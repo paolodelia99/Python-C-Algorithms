@@ -15,6 +15,7 @@ inc_dirs += ['c_alg/src']
 sources += glob.glob("cy_alg/*.pyx")
 sources += glob.glob("c_alg/src/*.c")
 
+# Data structures implemented
 impl_data_structure = [DataStructureExtention("queue", "queue"), DataStructureExtention("trie", "trie"),
                        DataStructureExtention("hash_table", "hash-table",
                                               ["c_alg/src/compare-string.c", "c_alg/src/hash-string.c"]),
