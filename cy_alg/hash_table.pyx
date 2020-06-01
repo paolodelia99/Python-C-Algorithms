@@ -1,15 +1,21 @@
 cimport chash_table
 cimport chash_string
 cimport chash_compare_string
+from libc.stdlib cimport malloc
+
 
 cdef class HashTable:
     cdef chash_table.HashTable* _c_hash_table
+    cdef chash_table.HashTableIterator* it
 
     def __cinit__(self):
         self._c_hash_table = chash_table.hash_table_new(<void*>chash_string.string_hash,
                                                         <void*>chash_compare_string.string_equal)
         if self._c_hash_table is NULL:
             raise MemoryError()
+
+        self.it = <chash_table.HashTableIterator*> malloc(sizeof(chash_table.HashTableIterator*))
+        chash_table.hash_table_iterate(self._c_hash_table, self.it)
 
     def __dealloc__(self):
         if self._c_hash_table is not NULL:
@@ -31,5 +37,16 @@ cdef class HashTable:
         return <str>value
 
     cpdef remove(self, object key):
-        if not chash_table.hash_table_remove(self._c_hash_table, <void*>key):
+        # fixme: remove doesn't work
+        if not chash_table.hash_table_remove(self._c_hash_table, <void*> key):
             raise IndexError("Key is not present in the hash_table")
+
+    cpdef object next(self):
+        cdef void* value = chash_table.hash_table_iter_next(self.it)
+        return <object>value
+
+    cpdef hash_next(self):
+        if not chash_table.hash_table_iter_has_more(self.it):
+            return False
+        else:
+            return True

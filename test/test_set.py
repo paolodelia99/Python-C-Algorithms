@@ -54,6 +54,7 @@ def test_set_remove_102():
 
     nose.tools.assert_equal(set.num_entries(), 1)
 
+
 # fixme redo it
 # def test_set_iterator():
 #     set = Set()
@@ -62,4 +63,4 @@ def test_set_remove_102():
 #     for s in str_list:
 #         set.insert(s)
 #
-#     nose.tools.assert_false(set.hash_next())
+#     nose.tools.assert_false(set.next())

@@ -55,5 +55,8 @@ cdef class Trie:
         return value
 
     cpdef int num_entries(self):
+        """
+        @return the number of entries of the trie
+        """
         cdef int num =  ctrie.trie_num_entries(self._c_trie)
         return num

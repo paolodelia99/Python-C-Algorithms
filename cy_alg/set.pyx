@@ -68,7 +68,7 @@ cdef class Set:
     cpdef next(self):
         # fixme it doesn't work properly
         cdef void* value = cset.set_iter_next(self.it)
-        return <object>value
+        return <str>value
 
     cpdef hash_next(self):
         # fixme it doesn't work properly
