@@ -7,20 +7,35 @@ Data Structures already implement:
 - Trie
 - HashTable
 - Set 
+- ArrayList
 
 Data Strucuture to Implement:
 - List
-- ArrayList
 - AVL-Tree
 - Binary Heap
 - Binomial Heap
 - Bloom Filter
 - Red Black Trees
 
-# Contributing
+## Usage
+
+Install the repo 
+
+    git clone https://github.com/paolodelia99/Python-C-Algorithms.git
+    
+Build 
+
+    python setup.py build_ext -i
+
+
+## Contributing
 
 Feel free to report issues and contributing to the code making it better.
 
-# Author
+## Author
 
 Paolo D'Elia 
+
+## License
+
+MIT

@@ -20,7 +20,8 @@ impl_data_structure = [DataStructureExtention("queue", "queue"), DataStructureEx
                        DataStructureExtention("hash_table", "hash-table",
                                               ["c_alg/src/compare-string.c", "c_alg/src/hash-string.c"]),
                        DataStructureExtention("set", "set", ["c_alg/src/compare-string.c", "c_alg/src/hash-string.c"]),
-                       DataStructureExtention("arraylist", "arraylist", ["c_alg/src/compare-int.c"])
+                       DataStructureExtention("arraylist", "arraylist", ["c_alg/src/compare-int.c"]),
+                       DataStructureExtention("bloom_filter", "bloom-filter", ["c_alg/src/hash-string.c", "c_alg/src/hash-int.c"])
                        ]
 
 
