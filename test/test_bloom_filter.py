@@ -4,8 +4,8 @@ import bloom_filter
 BloomFilter = bloom_filter.BloomFilter
 
 
-def test_bloom_filter_101():
-    b = BloomFilter(100, 30)
+def test_bloom_filter_str_101():
+    b = BloomFilter(100, 30, type="str")
     nose.tools.assert_is_instance(b, BloomFilter)
 
 
@@ -19,6 +19,23 @@ def test_bloom_filter_query():
     nose.tools.assert_true(b.query("Filter"))
     nose.tools.assert_false(b.query("Sos"))
     nose.tools.assert_false(b.query("Sas"))
+
+
+def test_bloom_filter_int_102():
+    b = BloomFilter(100, 30, type="int")
+    nose.tools.assert_is_instance(b, BloomFilter)
+
+
+def test_bloom_filter_query():
+    b = BloomFilter(100, 30, type="int")
+    b.insert(12)
+    b.insert(45)
+    b.insert(65)
+    nose.tools.assert_true(b.query(12))
+    nose.tools.assert_true(b.query(45))
+    nose.tools.assert_true(b.query(65))
+    nose.tools.assert_false(b.query(1))
+    nose.tools.assert_false(b.query(101))
 
 
 # fixme: concat doesn't work

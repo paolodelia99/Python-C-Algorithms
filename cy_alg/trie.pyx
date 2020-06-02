@@ -1,7 +1,9 @@
 cimport ctrie
 
 cdef class Trie:
-    """A python class represent the trie data structure"""
+    """
+    A python class represent the trie data structure
+    """
 
     cdef ctrie.Trie* _c_trie
     def __cinit__(self):
@@ -25,7 +27,13 @@ cdef class Trie:
         return c_string
 
     cpdef append(self,str key,int value):
-
+        """
+         Insert a new key-value pair into a trie.  The key is a NUL-terminated string.  For binary strings, use @ref trie_insert_binary.
+        
+        @param key: The key to access the new value
+        @param value: The value
+        @throw MemoryError if the the value isn't inserted
+        """
         cdef char* c_key = self.get_c_string(key)
 
         if not ctrie.trie_insert(self._c_trie, c_key, <void*><Py_ssize_t> value):
@@ -43,7 +51,12 @@ cdef class Trie:
             raise IndexError("Key is not present in the trie")
 
     cpdef int lookup(self, str key) except? -1:
-
+        """
+        Look up a value from its key in a trie
+        
+        @param key: The key
+        @return The value associated with the key, or @ref TRIE_NULL if not found in the trie.
+        """
         cdef char* c_key = self.get_c_string(key)
 
         cdef int value = <Py_ssize_t> ctrie.trie_lookup(self._c_trie, c_key)

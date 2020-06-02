@@ -16,6 +16,10 @@ cdef extern from "bloom-filter.h":
 
     int bloom_filter_query(BloomFilter *bloom_filter, BloomFilterValue value)
 
+    void bloom_filter_read(BloomFilter *bloom_filter, unsigned char *array)
+
+    void bloom_filter_load(BloomFilter *bloom_filter, unsigned char *array)
+
     BloomFilter* bloom_filter_union(BloomFilter *filter1, BloomFilter *filter2)
 
     BloomFilter* bloom_filter_intersection(BloomFilter *filter1, BloomFilter *filter2)

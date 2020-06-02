@@ -52,8 +52,7 @@ print(q.peek(234)) # True
 
 ```
 
-
-Here's an example on how to use the bloom filters
+Need a probabilistic data structure? Here's how you can use the bloom filters.
 
 ```python
 import bloom_filter 
