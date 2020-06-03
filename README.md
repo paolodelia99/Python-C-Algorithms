@@ -30,7 +30,11 @@ Build the cython wrapper
 
 ## Examples
 
-- Queue
+- [Queue](#Queue)
+- [Set](#Set)
+- [Bloom Filter](#bloom-filter)
+
+### Queue
 Do you need an efficent queue implementation? 
 Here's how you can have it!
 
@@ -52,7 +56,7 @@ print(q.peek(234)) # True
 
 ```
 
-- Set
+### Set
 
 ```python
 import set
@@ -76,7 +80,7 @@ print(s.query("is")) # False
 
 ```
 
-- Bloom Filter
+### Bloom Filter
 Need a probabilistic data structure? Here's how you can use the bloom filters.
 
 ```python
