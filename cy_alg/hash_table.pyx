@@ -1,6 +1,6 @@
 cimport chash_table
 cimport chash_string
-cimport chash_compare_string
+cimport ccompare_string
 from libc.stdlib cimport malloc
 
 
@@ -10,7 +10,7 @@ cdef class HashTable:
 
     def __cinit__(self):
         self._c_hash_table = chash_table.hash_table_new(<void*>chash_string.string_hash,
-                                                        <void*>chash_compare_string.string_equal)
+                                                        <void*>ccompare_string.string_equal)
         if self._c_hash_table is NULL:
             raise MemoryError()
 

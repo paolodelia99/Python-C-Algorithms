@@ -1,6 +1,8 @@
 cimport cset
 cimport chash_string
-cimport chash_compare_string
+cimport ccompare_string
+cimport chash_int
+cimport ccompare_int
 from libc.stdlib cimport malloc, free
 
 
@@ -11,12 +13,19 @@ cdef class Set:
     cdef cset.Set* _c_set
     cdef cset.SetIterator* it
 
-    def __cinit__(self):
+    def __cinit__(self, type="str"):
         """
         Set constructor
         """
-        self._c_set = cset.set_new(<void*>chash_string.string_hash,
-                                                        <void*>chash_compare_string.string_equal)
+        if type == "str":
+            self._c_set = cset.set_new(<void*>chash_string.string_hash,
+                                                        <void*>ccompare_string.string_equal)
+        elif type == "int":
+            self._c_set = cset.set_new(<void*>chash_int.int_hash,
+                                                        <void*>ccompare_int.int_equal)
+        else:
+            self._c_set = cset.set_new(<void*>chash_string.string_hash,
+                                                        <void*>ccompare_string.string_equal)
 
         if self._c_set is NULL:
             raise MemoryError()
@@ -28,6 +37,9 @@ cdef class Set:
     def __dealloc__(self):
         if self._c_set is not NULL:
             cset.set_free(self._c_set)
+
+        if self.it is not NULL:
+            free(self.it)
 
     cpdef insert(self, object value):
         """

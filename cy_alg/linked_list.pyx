@@ -1,6 +1,6 @@
 cimport clist
-
-# fixme: object linked list isn't callable
+cimport ccompare_int
+cimport ccompare_string
 
 cdef class List:
     """
@@ -9,7 +9,9 @@ cdef class List:
 
     cdef clist.ListEntry* head
     cpdef str type
-    cpdef unsigned int length
+    cpdef unsigned int list_length
+    cdef clist.ListEqualFunc equal_func
+    cdef clist.ListCompareFunc compare_func
 
     def __cinit__(self, object data, type="int"):
         """
@@ -21,12 +23,18 @@ cdef class List:
         # Check the list type
         if type == "int":
             self.type = "int"
+            self.compare_func = <void*>ccompare_int.int_compare
+            self.equal_func = <void*>ccompare_int.int_equal
         elif type == "str":
             self.type = "str"
+            self.compare_func = <void*>ccompare_string.string_compare
+            self.equal_func = <void*>ccompare_string.string_equal
         elif type == "float":
             self.type = "float"
         else:
             self.type = "str"
+            self.compare_func = <void*>ccompare_string.string_compare
+            self.equal_func = <void*>ccompare_string.string_equal
 
         clist.list_prepend(&self.head, <void*> data)
 
@@ -46,7 +54,7 @@ cdef class List:
         if new_entry is NULL:
             raise MemoryError()
         else:
-            self.length += 1
+            self.list_length += 1
 
 
     cpdef append(self, object data):
@@ -58,9 +66,14 @@ cdef class List:
         if new_entry is NULL:
             raise MemoryError()
         else:
-            self.length += 1
+            self.list_length += 1
 
     cpdef extend(self, values):
+        """
+        Append a list of values in the list
+        
+        @param values: list of values to append
+        """
         for value in values:
             self.append(value)
 
@@ -68,16 +81,23 @@ cdef class List:
         """
         @return the length of the list
         """
-        cpdef unsigned int length = clist.list_length(self.head)
-        self.length = length
-        return clist.list_length(self.head)
+        cpdef unsigned int l_length = clist.list_length(self.head)
+        self.list_length = l_length
+        return l_length
 
     cpdef object get_head(self):
+        """
+        @return the data of the head of the list
+        """
         head_data = <object>clist.list_data(self.head)
         return head_data
 
     cpdef object get_nth_data(self, unsigned int n):
-        if n > self.length:
+        """
+        @param n: nth element of the list
+        """
+        # Check wheather of not n in bigger than self.length
+        if n > self.list_length:
             return float('-inf')
 
         nth_entry_data = <object>clist.list_nth_data(self.head, n)
@@ -85,3 +105,16 @@ cdef class List:
             return float('-inf')
 
         return nth_entry_data
+
+    cpdef remove_data(self, object data):
+        """
+        Remove the given data in the list if is present otherwise it throws an error
+        
+        @param data: the data to remove in the list
+        """
+        if not clist.list_remove_data(&self.head, self.equal_func, <void*>data):
+            raise IndexError("Could not find the data")
+
+    cpdef sort(self):
+        # fixme: there is something wrong with sort
+        clist.list_sort(&self.head, <void*>self.compare_func)
