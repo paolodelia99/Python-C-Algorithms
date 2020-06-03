@@ -30,7 +30,7 @@ Build the cython wrapper
 
 ## Examples
 
-
+- Queue
 Do you need an efficent queue implementation? 
 Here's how you can have it!
 
@@ -52,6 +52,31 @@ print(q.peek(234)) # True
 
 ```
 
+- Set
+
+```python
+import set
+Set = set.Set()
+
+s = Set("str")
+
+str_list = ["Hello", "my","name", "is", "Paolo","Paolo","is", "my","name"]
+
+for el in str_list:
+    s.insert(el)
+
+print(s.num_entries()) # 5 
+print(s.query("Paolo")) # True
+print(s.query("Hello")) # True
+print(s.query("Dog")) # False
+
+s.remove("is")
+
+print(s.query("is")) # False
+
+```
+
+- Bloom Filter
 Need a probabilistic data structure? Here's how you can use the bloom filters.
 
 ```python
@@ -74,6 +99,8 @@ print(b.query(1025)) # False
 print(b.query(562)) # False
 
 ```
+
+
 
 ## Contributing
 
