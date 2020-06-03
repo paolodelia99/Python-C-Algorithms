@@ -27,7 +27,7 @@ cdef extern from "list.h":
 
     ListValue list_data(ListEntry* listentry)
 
-    ListEntry* list_nth_entry(ListEntry* list, int n)
+    ListEntry* list_nth_entry(ListEntry* list, unsigned int n)
 
     ListValue list_nth_data(ListEntry* list, int n)
 
