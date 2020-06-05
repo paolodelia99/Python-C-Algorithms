@@ -6,6 +6,7 @@ cdef class Trie:
     """
 
     cdef ctrie.Trie* _c_trie
+
     def __cinit__(self):
         self._c_trie = ctrie.trie_new()
         if self._c_trie is NULL:

@@ -1,5 +1,7 @@
 cimport chash_table
 cimport chash_string
+cimport chash_int
+cimport ccompare_int
 cimport ccompare_string
 from libc.stdlib cimport malloc
 
@@ -8,9 +10,22 @@ cdef class HashTable:
     cdef chash_table.HashTable* _c_hash_table
     cdef chash_table.HashTableIterator* it
 
-    def __cinit__(self):
-        self._c_hash_table = chash_table.hash_table_new(<void*>chash_string.string_hash,
+    def __cinit__(self, type="str"):
+        """
+        Hash table constructor
+
+        @param type the of the hash table key int or str
+        """
+        if type == "str":
+            self._c_hash_table = chash_table.hash_table_new(<void*>chash_string.string_hash,
                                                         <void*>ccompare_string.string_equal)
+        elif type == "int":
+            self._c_hash_table = chash_table.hash_table_new(<void*>chash_int.int_hash,
+                                                        <void*>ccompare_int.int_equal)
+        else:
+            self._c_hash_table = chash_table.hash_table_new(<void*>chash_string.string_hash,
+                                                        <void*>ccompare_string.string_equal)
+
         if self._c_hash_table is NULL:
             raise MemoryError()
 
@@ -27,14 +42,18 @@ cdef class HashTable:
                                              <void*>value):
             raise MemoryError()
 
-    cpdef num_entries(self):
-        cdef entries = chash_table.hash_table_num_entries(self._c_hash_table)
+    cpdef unsigned int num_entries(self):
+        cdef unsigned int entries = chash_table.hash_table_num_entries(self._c_hash_table)
         return entries
 
-    cpdef get(self, object key):
+    cpdef object get(self, object key):
         # fixme: better implementation
-        value = chash_table.hash_table_lookup(self._c_hash_table, <void*>key)
-        return <str>value
+        value = <object>chash_table.hash_table_lookup(self._c_hash_table, <void*>key)
+
+        if value == 0:
+            raise IndexError("Element not found")
+
+        return value
 
     cpdef remove(self, object key):
         # fixme: remove doesn't work

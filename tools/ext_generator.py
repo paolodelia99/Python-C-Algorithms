@@ -18,11 +18,12 @@ sources += glob.glob("c_alg/src/*.c")
 # Data structures implemented
 impl_data_structure = [DataStructureExtention("queue", "queue"), DataStructureExtention("trie", "trie"),
                        DataStructureExtention("hash_table", "hash-table",
-                                              ["c_alg/src/compare-string.c", "c_alg/src/hash-string.c"]),
+                                              ["c_alg/src/compare-string.c", "c_alg/src/hash-string.c","c_alg/src/hash-int.c", "c_alg/src/compare-int.c"]),
                        DataStructureExtention("set", "set", ["c_alg/src/compare-string.c", "c_alg/src/hash-string.c","c_alg/src/hash-int.c", "c_alg/src/compare-int.c"]),
                        DataStructureExtention("arraylist", "arraylist", ["c_alg/src/compare-int.c"]),
                        DataStructureExtention("bloom_filter", "bloom-filter", ["c_alg/src/hash-string.c", "c_alg/src/hash-int.c"]),
-                       DataStructureExtention("linked_list", "list", ["c_alg/src/compare-string.c","c_alg/src/compare-int.c"])
+                       DataStructureExtention("linked_list", "list", ["c_alg/src/compare-string.c", "c_alg/src/compare-int.c"]),
+                       DataStructureExtention("binary_heap", "binary-heap", ["c_alg/src/compare-string.c", "c_alg/src/compare-int.c"])
                        ]
 
 

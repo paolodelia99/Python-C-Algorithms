@@ -10,7 +10,6 @@ cdef extern from "list.h":
         ListEntry** prev_next
         ListEntry* current
 
-
     ctypedef void* ListValue
     ctypedef void* ListCompareFunc
     ctypedef void* ListEqualFunc
@@ -50,4 +49,3 @@ cdef extern from "list.h":
     ListValue list_iter_next(ListIterator* iterator)
 
     void list_iter_remove(ListIterator* iterator)
-

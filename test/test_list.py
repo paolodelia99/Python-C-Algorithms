@@ -4,14 +4,16 @@ import linked_list
 List = linked_list.List
 int_list = [13, 45, 67, 78]
 
+
 def create_sample_list():
-    l = List(89,"int")
+    l = List(89, "int")
     l.extend(int_list)
 
     return l
 
+
 def test_list_101():
-    l = List(12,"int")
+    l = List(12, "int")
     nose.tools.assert_is_instance(l, List)
 
 
@@ -23,7 +25,7 @@ def test_list_prepend():
 
 
 def test_list_append():
-    l = List(34,"int")
+    l = List(34, "int")
     int_list = [12, 45, 67, 89, 100]
 
     for el in int_list:
@@ -46,7 +48,7 @@ def test_list_get_nth_data():
 
     nose.tools.assert_equal(l.get_nth_data(0), 89)
     for i in range(len(int_list)):
-        nose.tools.assert_equal(l.get_nth_data(i+1), int_list[i])
+        nose.tools.assert_equal(l.get_nth_data(i + 1), int_list[i])
 
     nose.tools.assert_equal(l.get_nth_data(100), float('-inf'))
 
@@ -69,7 +71,6 @@ def test_remove_data_exception():
         l.remove_data(100)
     except IndexError as e:
         nose.tools.assert_is_instance(e, IndexError)
-
 
 # def test_list_sort():
 #     l = List(89, "int")

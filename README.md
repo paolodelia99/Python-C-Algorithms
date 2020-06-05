@@ -48,11 +48,67 @@ l = [100, 2, 234, 4, 5, 34, 56, 12, 98, 67, 34]
 
 q.extend(l)
 
-print(q.peek(100)) # True
+print(q.peek()) # 100
 q.pop()
-print(q.peek(2)) # True
+print(q.peek()) # 2
 q.pop()
-print(q.peek(234)) # True
+print(q.peek()) # 234
+
+```
+
+### List
+
+```python
+import linked_list
+
+List = linked_list.List()
+
+l = List(89,"int")
+
+arr = [38, 39 , 101, 23, 45, 56, 67]
+
+l.entend(arr)
+
+# Print all the elements of the list
+for i in range(l.length()): # 89, 38, 39, 101, 23, 45, 56, 67
+    print(l.get_nth_data(i)) 
+
+l.prepend(1)
+
+# Print all the elements of the list
+for i in range(l.length()): # 1, 89, 38, 39, 101, 23, 45, 56, 67
+    print(l.get_nth_data(i)) 
+
+# Using list of strings
+
+l_str = ("Hello")
+
+str_arr = ["world", "dog","space","cake"]
+
+l_str.extend(str_arr)
+
+for i in range(l_str.length()):
+    print(l_str.get_nth_data(i)) # Hello, world, dog, space, cake
+
+```
+
+### Trie
+
+```python
+import trie
+Trie = trie.Trie()
+
+t = Trie()
+
+t.append("a", 23)
+t.append("ab", 78)
+t.append("abc", 14)
+t.append("cb", 12)
+
+print(t.lookup("a")) # 23
+print(t.lookup("ab")) # 78
+print(t.lookup("abc")) # 14
+print(t.lookup("cb")) # 12
 
 ```
 
