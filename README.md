@@ -31,6 +31,8 @@ Build the cython wrapper
 ## Examples
 
 - [Queue](#Queue)
+- [Trie](#trie)
+- [List](#list)
 - [Set](#Set)
 - [Bloom Filter](#bloom-filter)
 
